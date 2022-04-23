@@ -1,0 +1,24 @@
+{
+  "dependencies": {
+    "ws": "^8.5.0"
+  },
+  "devDependencies": {
+    "@types/ws": "^8.5.3",
+    "dotenv": "^16.0.0",
+    "ts-node": "^10.7.0",
+    "typescript": "^4.6.3"
+  },
+  "name": "worker-slowandsteady.io",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "dev": "ts-node src/worker.ts",
+    "build": "tsc",
+    "start": "node src/worker.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}
