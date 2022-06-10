@@ -16,7 +16,7 @@
   "scripts": {
     "dev": "ts-node src/worker.ts",
     "build": "tsc",
-    "start": "node src/worker.js",
+    "start": "node dist/worker.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
