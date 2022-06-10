@@ -1,21 +1,23 @@
 import WebSocket from "ws";
-import dotenv from "dotenv";
-dotenv.config();
-
-const URL = "wss://slowandsteady.io";
-
-const USER = {
-    client_uid: process.env.CLIENT_UID, 
-    client_username: process.env.CLIENT_USERNAME
-};
-
-console.log("Running server...");
-const socket = new WebSocket(URL, {
-  perMessageDeflate: false
-});
+import { loadConfig } from "./config";
 
 
-socket.on("open", () => {
+const main = async () => {
+  const config = await loadConfig();
+  if(!config){
+    console.log("Failed to load config.");
+    return;
+  }
+
+  const { URL, USER } = config;
+
+  console.log("Running server...");
+  const socket = new WebSocket(URL, {
+    perMessageDeflate: false
+  });
+
+
+  socket.on("open", () => {
     console.log("Connection opened...");
     console.log("\x1b[32m%s\x1b[0m", `Logged in as ${USER.client_username}`);
 
@@ -23,8 +25,11 @@ socket.on("open", () => {
     const serializedData = JSON.stringify(data);
     
     socket.send(serializedData);
-});
+  });
 
-socket.on("message", (data) => {
+  socket.on("message", (data) => {
     console.log("received: %s", data);
-});
+  });
+};
+
+main().catch(console.error);
